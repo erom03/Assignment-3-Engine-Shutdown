@@ -1,11 +1,11 @@
 #include <stdio.h>
 
 int numActions = 0; // keeps track of number of actions user will do
-int currBest = 0;   // keeps track of current best temperature reached
+int bestTemp = 0;   // keeps track of current best temperature reached
 
 void permute(int * used, int * currPerm, int index, int N, int actions[][numActions], int * bestPerm, int * initial);
 void calcTemp(int * currPerm, int actions[][numActions], int * bestPerm, int * initial);
-void printBest(int * bestPerm);
+void printPerm(int * bestPerm);
 
 int main() {
     // Gets the number of actions requested by user
@@ -28,7 +28,7 @@ int main() {
     // Sets the current best temperature to the temp
     // made by initial permutation
     for(int i = 0; i < numActions; i++)
-        currBest += initial[i];
+        bestTemp += initial[i];
 
     // Stores the best permutation as the default
     // (0, 1, 2, ..., N - 1)
@@ -43,6 +43,8 @@ int main() {
         used[i] = 0;    // initialize used
 
     permute(used, currPerm, 0, numActions, actions, bestPerm, initial);
+
+    printPerm(bestPerm);
 
     return 0;
 }
@@ -71,8 +73,6 @@ void permute(int * used, int * currPerm, int index, int N, int actions[][numActi
         // Unuse the value
         used[curValue] = 0;
     } 
-
-    printBest(bestPerm);
 }
 
 void calcTemp(int * currPerm, int actions[][numActions], int * bestPerm, int * initial) {
@@ -91,12 +91,14 @@ void calcTemp(int * currPerm, int actions[][numActions], int * bestPerm, int * i
             currTemp += actions[currPerm[i]][currPerm[j]];
         }
     }
-
-    // Check if the current temp is the best one
-    // If it is, set best permutation to the current one
+    // Check if the current temp is lower than the best temp
+    if(currTemp < bestTemp) {
+        // If it is, set best permutation to the current one
+        bestPerm = currPerm;
+    }
 }
 
-void printBest(int * bestPerm) {
+void printPerm(int * bestPerm) {
     for(int i = 0; i < numActions; i++)
         printf("%d ", bestPerm[i] + 1);
 
