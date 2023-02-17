@@ -24,6 +24,7 @@ int main() {
         for(int j = 0; j < numActions; j++)
             scanf("%d", &actions[i][j]);
 
+    // THIS NEEDS TO BE FIXED
     // Sets the current best temperature to the temp
     // made by initial permutation
     for(int i = 0; i < numActions; i++)
@@ -33,7 +34,7 @@ int main() {
     // (0, 1, 2, ..., N - 1)
     int bestPerm[numActions];
     for(int i = 0; i < numActions; i++)
-        bestPerm[i] = i;
+        bestPerm[i] = 0;
 
     // Used in permutation algorithm
     int used[numActions];       // 0 or 1 representing which values have been used
@@ -79,12 +80,20 @@ void calcTemp(int * currPerm, int actions[][numActions], int * bestPerm, int * i
     
     // Scroll through current permutation
     for(int i = 0; i < numActions; i++) {
-        // First value has initial value
-        if(i == 0)
-            currTemp += initial[currPerm[0]];   // This adds the initial temp change of first element in current permutation
-
-        // For subsequent values
+        // Add initial temp change
+        currTemp += initial[currPerm[i]];
+        // Check vals before it
+        for(int j = i - 1; j >= 0; j--) {
+            // Adds the changes in temp the 
+            // current permutation results in
+            // currPerm[i] represents the number were currently looking at
+            // currPerm[j] represents the prior numbers in currPerm
+            currTemp += actions[currPerm[i]][currPerm[j]];
+        }
     }
+
+    // Check if the current temp is the best one
+    // If it is, set best permutation to the current one
 }
 
 void printBest(int * bestPerm) {
