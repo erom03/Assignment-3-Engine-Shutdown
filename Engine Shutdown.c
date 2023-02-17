@@ -84,7 +84,7 @@ void calcTemp(int * currPerm, int actions[][numActions], int * bestPerm, int * i
         currTemp += initial[currPerm[i]];
         // Check vals before it
         for(int j = i - 1; j >= 0; j--) {
-            // Adds the changes in temp the 
+            // Adds the changes in temp that the 
             // current permutation results in
             // currPerm[i] represents the number were currently looking at
             // currPerm[j] represents the prior numbers in currPerm
