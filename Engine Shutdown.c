@@ -98,7 +98,7 @@ void calcTemp(int * currPerm, int actions[][numActions], int * bestPerm, int * i
 
 void printBest(int * bestPerm) {
     for(int i = 0; i < numActions; i++)
-        printf("%d ", bestPerm[i]);
+        printf("%d ", bestPerm[i] + 1);
 
     printf("\n");
 }
