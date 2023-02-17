@@ -24,12 +24,6 @@ int main() {
         for(int j = 0; j < numActions; j++)
             scanf("%d", &actions[i][j]);
 
-    // THIS NEEDS TO BE FIXED
-    // Sets the current best temperature to the temp
-    // made by initial permutation
-    for(int i = 0; i < numActions; i++)
-        bestTemp += initial[i];
-
     // Stores the best permutation as the default
     // (0, 1, 2, ..., N - 1)
     int bestPerm[numActions];
