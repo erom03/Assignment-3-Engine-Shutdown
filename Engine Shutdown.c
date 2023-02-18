@@ -85,12 +85,15 @@ void calcTemp(int * currPerm, int actions[][numActions], int * bestPerm, int * i
             currTemp += actions[currPerm[i]][currPerm[j]];
         }
     }
+    
     // Check if the current temp is lower than the best temp
     if(currTemp < bestTemp) {
-        // If it is, save new best temp and
-        // set best permutation to current one
+        // Set best temp to the current temp
         bestTemp = currTemp;
-        bestPerm = currPerm;
+        
+        // Set best permutation to current perm
+        for(int i = 0; i < numActions; i++)
+            bestPerm[i] = currPerm[i];
     }
 }
 
